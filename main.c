@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: vbatiot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/28 13:45:36 by vbatiot           #+#    #+#             */
 /*   Updated: 2014/11/29 17:36:05 by vbatiot          ###   ########.fr       */
+=======
+/*   By: gbadi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/11/28 08:15:26 by gbadi             #+#    #+#             */
+/*   Updated: 2014/11/28 11:08:20 by gbadi            ###   ########.fr       */
+>>>>>>> 240e7e134046bdeca6c87c2dd9070715c93a14b1
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +53,19 @@ char					*path_join(char *path, char *name)
 
 void					render_details(t_node *file, int flags)
 {
+<<<<<<< HEAD
 	struct stat			st;
 	
 	ft_putstr("DETAILS + ");
 	ft_putendl(file->name);
 }
 	
+=======
+	ft_putstr("DETAILS + ");
+	ft_putendl(file->name);
+}
+
+>>>>>>> 240e7e134046bdeca6c87c2dd9070715c93a14b1
 void					render_file(t_node *file, int flags)
 {
 	if ( ( ISHIDDEN(file) && A_ON) || !ISHIDDEN(file))
@@ -97,9 +111,17 @@ void					ft_ls(char *path, int flags)
 	t_node				*dirs;
 	t_node				*files;
 
+<<<<<<< HEAD
 	dirs = new_elem("", "");
 	files = new_elem("", "");
 	if ((directory = opendir(path)) == NULL)
+=======
+	// Norme interruption
+	dirs = new_elem("", "");
+	files = new_elem("", "");
+	if ((directory = opendir(path)) == NULL)
+		// Norme interruption
+>>>>>>> 240e7e134046bdeca6c87c2dd9070715c93a14b1
 		return ;
 	while ((file = readdir(directory)) > 0)
 	{
@@ -107,6 +129,10 @@ void					ft_ls(char *path, int flags)
 			dirs = push_elem(dirs, file->d_name, path_join(path, file->d_name));
 		files = push_elem(files, file->d_name, path_join(path, file->d_name));
 	}
+<<<<<<< HEAD
+=======
+	// Norme interruption
+>>>>>>> 240e7e134046bdeca6c87c2dd9070715c93a14b1
 	files = files->next;
 	dirs = dirs->next;
 	render_list(files, flags);
@@ -127,10 +153,17 @@ char					*get_next_opt(int ac, char **av)
 	return (ft_strdup(av[index++]));
 }
 
+<<<<<<< HEAD
 void					raise_flags(int ac, char **av, int *flags)
 {
 	char				*opt;
 	size_t				i;
+=======
+void						raise_flags(int ac, char **av, int *flags)
+{
+	char					*opt;
+	size_t					i;
+>>>>>>> 240e7e134046bdeca6c87c2dd9070715c93a14b1
 
 	i = 1;
 	while ((opt = get_next_opt(ac, av)) != 0)
@@ -148,19 +181,32 @@ void					raise_flags(int ac, char **av, int *flags)
 			else if (opt[i] == 't')
 				*flags |= T_FLAG;
 			else
+<<<<<<< HEAD
 				// Norme interrupt
 				printf("%s:%s\n", "NOT AN FCKING OPTION", opt);
+=======
+				// Norme interruption
+				printf("%s:%s\n", "NOT AN OPTION", opt);
+>>>>>>> 240e7e134046bdeca6c87c2dd9070715c93a14b1
 			i++;
 		}
 		i = 1;
 	}
 }
 
+<<<<<<< HEAD
 int						main(int ac, char **av)
 {
 	int					flags;
 
 	flags = 0; //egal a 0b00000;
+=======
+int					main(int ac, char **av)
+{
+	int				flags;
+
+	flags = 0; //0b00000
+>>>>>>> 240e7e134046bdeca6c87c2dd9070715c93a14b1
 	raise_flags(ac, av, &flags);
 	ft_ls(".", flags);
 	return (0);
