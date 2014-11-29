@@ -6,7 +6,7 @@
 /*   By: gbadi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 17:41:07 by gbadi             #+#    #+#             */
-/*   Updated: 2014/11/29 17:41:18 by gbadi            ###   ########.fr       */
+/*   Updated: 2014/11/29 19:14:05 by gbadi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_node					*push_elem(t_node *list, char *name, char *path)
 	t_node				*current;
 
 	current = list;
-	new = new_elem(name,path);
+	new = new_elem(name, path);
 	while (current->next != NULL)
 		current = current->next;
 	current->next = new;

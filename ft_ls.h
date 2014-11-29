@@ -6,7 +6,7 @@
 /*   By: gbadi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 17:39:22 by gbadi             #+#    #+#             */
-/*   Updated: 2014/11/29 17:40:01 by gbadi            ###   ########.fr       */
+/*   Updated: 2014/11/29 20:34:23 by gbadi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,20 @@
 # define L_ON ((L_FLAG & flags) ? 1 : 0)
 
 # define ISHIDDEN(x) ((x->name[0] == '.') ? 1 : 0)
+# define ISCURRENT(x) ((ft_strcmp(x->name, ".") == 0) ? 1:0 )
+# define IS(x, y) ((ft_strcmp(x, y) == 0) ? 1 : 0)
+
+# define TRUE 1
+# define FALSE 0
 
 typedef struct dirent		dirent;
+typedef int					t_bool;
 
 typedef struct			s_node
 {
 	char				*name;
 	char				*path;
+	t_bool				first;
 	struct s_node		*next;
 }						t_node;
 
@@ -53,13 +60,15 @@ typedef struct 			s_file
 t_node					*new_elem(char *name, char *path);
 t_node					*push_elem(t_node *list, char *name, char *path);
 char					*path_join(char *path, char *name);
+char					*ft_filepermission(struct stat *st);
 void					render_file(t_node *file, int flags);
 void					render_details(t_node *file, int flags);
-void					ft_ls(char *path, int flags);
+void					ft_ls(t_node *dir, int flags);
 void					render_list_r(t_node *list, int flags);
 void					render_list(t_node *list, int flags);
 void					render_file(t_node *file, int flags);
 char					*get_next_opt(int ac, char **av);
 void					raise_flags(int ac, char **av, int *flags);
+void					ft_ls_relaunch(t_node *dirs, int flags);
 
 #endif
