@@ -6,7 +6,7 @@
 /*   By: gbadi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/29 17:39:22 by gbadi             #+#    #+#             */
-/*   Updated: 2014/11/29 20:34:23 by gbadi            ###   ########.fr       */
+/*   Updated: 2014/11/30 16:37:15 by vbatiot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <sys/types.h> 
 # include <sys/stat.h> 
 # include <unistd.h>
+# include <pwd.h>
+# include <grp.h>
 
 # define A_FLAG 0b00001
 # define L_FLAG 0b00010
@@ -55,6 +57,9 @@ typedef struct 			s_file
 {
 	char				*mode;
 	size_t				n_link;
+	size_t				size;
+	char				*uid;
+	char				*gid;
 }						t_file;
 
 t_node					*new_elem(char *name, char *path);
