@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_elem.c                                        :+:      :+:    :+:   */
+/*   list.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbadi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/29 17:41:07 by gbadi             #+#    #+#             */
-/*   Updated: 2014/11/29 19:14:05 by gbadi            ###   ########.fr       */
+/*   Created: 2014/11/10 15:40:31 by gbadi             #+#    #+#             */
+/*   Updated: 2014/11/10 15:55:22 by gbadi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#ifndef LIST_H
+# define LIST_H
 
-t_node					*push_elem(t_node *list, char *name, char *path)
+typedef struct			s_list
 {
-	t_node				*new;
-	t_node				*current;
+	void				*content;
+	size_t				content_size;
+	struct s_list		*next;
+}						t_list;
 
-	current = list;
-	new = new_elem(name, path);
-	while (current->next != NULL)
-		current = current->next;
-	current->next = new;
-	return (list);
-}
-
+#endif
