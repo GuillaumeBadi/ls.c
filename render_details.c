@@ -1,8 +1,15 @@
 #include "ft_ls.h"
 
-static char				*ft_format_right(void)
+void					print_date(char *str)
 {
-	return (0);
+	int i;
+
+	i = 4;
+	while (str[i + 9] != '\0')
+	{
+		ft_putchar(str[i]);
+		i++;
+	}
 }
 
 void					render_details(t_node *file, int flags)
@@ -14,11 +21,13 @@ void					render_details(t_node *file, int flags)
 	ft_putchar(' ');
 	ft_putnbr(st.st_nlink);
 	ft_putchar(' ');
-	ft_putnbr(st.st_size);
-	ft_putchar(' ');
 	ft_putstr(getpwuid(st.st_uid)->pw_name);
 	ft_putchar(' ');
 	ft_putstr(getgrgid(st.st_gid)->gr_name);
+	ft_putchar(' ');
+	ft_putnbr(st.st_size);
+	ft_putchar(' ');
+	print_date(ctime(&st.st_mtime));
 	ft_putchar(' ');
 	ft_putendl(file->name);
 }
