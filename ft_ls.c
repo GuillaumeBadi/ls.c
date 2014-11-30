@@ -19,8 +19,12 @@ void					ft_ls(t_node *dir, int flags)
 	}
 	files = files->next;
 	dirs = dirs->next;
+	printf("%s\n", "check");
+	printf("%d\n", dir->first);
 	if ((ISHIDDEN(dir) && A_ON) || !ISHIDDEN(dir) || dir->first == TRUE)
+	{
 		render_list(files, flags);
+	}
 	free(files);
 	closedir(directory);
 	if (RR_ON)

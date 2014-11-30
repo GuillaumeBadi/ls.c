@@ -26,6 +26,7 @@
 # define ISHIDDEN(x) ((x->name[0] == '.') ? 1 : 0)
 # define ISCURRENT(x) ((ft_strcmp(x->name, ".") == 0) ? 1:0 )
 # define IS(x, y) ((ft_strcmp(x, y) == 0) ? 1 : 0)
+# define ISOPT(x) (x[0] == '-')
 
 # define TRUE 1
 # define FALSE 0
