@@ -6,12 +6,14 @@ t_node				*get_args(int ac, char **av, int flags)
 	int				dir;
 
 	dir = 0;
-	list = new_elem(".", ".");
+	// Norme interruption
+	list = new_elem(".", ".", 0);
 	while (--ac)
 	{
 		if (!ISOPT(av[ac]))
 		{
-			list = sort_insert(list, new_elem(av[ac], av[ac]), flags);
+			// Norme interruption
+			list = sort_insert(list, new_elem(av[ac], av[ac], 0), flags);
 			dir = 1;
 		}
 	}
@@ -45,8 +47,10 @@ int					main(int ac, char **av)
 	int				count;
 	t_node			*dirs;
 	t_node			*current;
+	int				first;
 
 	flags = 0;
+	first = 1;
 	raise_flags(ac, av, &flags);
 	dirs = get_args(ac, av, flags);
 	count = dir_count(dirs);
@@ -60,7 +64,13 @@ int					main(int ac, char **av)
 		while (current != NULL)
 		{
 			// norme interupt
-			dprintf(1, "\n%s:\n", current->path);
+			if (first)
+			{
+				dprintf(1, "%s:\n", current->path);
+				first = !first;
+			}
+			else
+				dprintf(1, "\n%s:\n", current->path);
 			ft_ls(current, flags);
 			current = current->next;
 		}

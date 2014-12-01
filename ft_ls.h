@@ -18,6 +18,8 @@
 # define T_FLAG 0b01000
 # define R_FLAG 0b10000
 
+# define FORBIDDEN_FILE "FORBIDDEN_FILE"
+
 # define A_ON ((A_FLAG & flags) ? 1 : 0)
 # define RR_ON ((RR_FLAG & flags) ? 1: 0)
 # define R_ON ((R_FLAG & flags) ? 1 : 0)
@@ -60,8 +62,8 @@ typedef struct 			s_file
 	char				*mtime;
 }						t_file;
 
-t_node					*new_elem(char *name, char *path);
-t_node					*push_elem(t_node *list, char *name, char *path);
+t_node					*new_elem(char *name, char *path, size_t time);
+t_node					*push_elem(t_node *list, char *name, char *path, size_t time);
 char					*path_join(char *path, char *name);
 char					*ft_filepermission(struct stat *st);
 void					render_file(t_node *file, int flags);

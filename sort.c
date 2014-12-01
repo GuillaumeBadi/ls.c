@@ -6,9 +6,14 @@ int					greater(char *i, char *j)
 	return (ft_strcmp(i, j) > 0);
 }
 
-int							int_greater(int i, int j)
+int							time_compare(t_node *i, t_node *j)
 {
-	return (i > j);
+	if (i->time < j->time)
+		return (1);
+	if (i->time > j->time)
+		return (0);
+	if (i->time == j->time)
+		return (greater(i->name, j->name));
 }
 
 static t_node				*insert_after(t_node *list, t_node *node)
@@ -32,14 +37,14 @@ t_node				*sort_insert(t_node *list, t_node *node, int flags)
 	t_node			*current;
 
 	current = list;
-	if ( (T_ON) ? int_greater(current->time, node->time) : greater(current->name, node->name) )
+	if ( (T_ON) ? time_compare(current, node) : greater(current->name, node->name) )
 	{
 		insert_before(list, node);
 		return (node);
 	}
 	else
 	{
-		while (current->next != NULL && ( (T_ON) ? int_greater(node->time, current->next->time) : greater(node->name, current->next->name) ) )
+		while (current->next != NULL && ( (T_ON) ? time_compare(node, current->next) : greater(node->name, current->next->name) ) )
 			current = current->next;
 		insert_after(current, node);
 	}
