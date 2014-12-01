@@ -1,6 +1,6 @@
 #include "ft_ls.h"
 
-t_node				*get_args(int ac, char **av)
+t_node				*get_args(int ac, char **av, int flags)
 {
 	t_node			*list;
 	int				dir;
@@ -11,8 +11,7 @@ t_node				*get_args(int ac, char **av)
 	{
 		if (!ISOPT(av[ac]))
 		{
-			printf("pushing = %s\n", av[ac]);
-			list = push_elem(list, av[ac], av[ac]);
+			list = sort_insert(list, new_elem(av[ac], av[ac]), flags);
 			dir = 1;
 		}
 	}
@@ -37,7 +36,6 @@ int					dir_count(t_node *list)
 		current->first = 1;
 		current = current->next;
 	}
-	printf(" i = %d\n", i);
 	return (i);
 }
 
@@ -50,11 +48,10 @@ int					main(int ac, char **av)
 
 	flags = 0;
 	raise_flags(ac, av, &flags);
-	dirs = get_args(ac, av);
+	dirs = get_args(ac, av, flags);
 	count = dir_count(dirs);
 	if (count == 1)
 	{
-		printf("%s\n", dirs->path);
 		ft_ls(dirs, flags);
 	}
 	else if (count > 1)

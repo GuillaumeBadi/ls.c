@@ -41,6 +41,13 @@ typedef struct			s_node
 	char				*path;
 	t_bool				first;
 	struct s_node		*next;
+	char				*mode;
+	size_t				n_link;
+	size_t				size;
+	char				*uid;
+	char				*gid;
+	char				*mtime;
+	size_t				time;
 }						t_node;
 
 typedef struct 			s_file
@@ -66,5 +73,6 @@ void					render_file(t_node *file, int flags);
 char					*get_next_opt(int ac, char **av);
 void					raise_flags(int ac, char **av, int *flags);
 void					ft_ls_relaunch(t_node *dirs, int flags);
+t_node					*sort_insert(t_node *list, t_node *node, int flags);
 
 #endif
