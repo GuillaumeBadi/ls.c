@@ -19,7 +19,10 @@ void					ft_ls(t_node *dir, int flags)
 	dirs = new_elem(FORBIDDEN_FILE, FORBIDDEN_FILE, 0);
 	files = new_elem(FORBIDDEN_FILE, FORBIDDEN_FILE, 0);
 	if ((directory = opendir(dir->path)) == NULL)
+	{
+		dprintf(1, "%s: %s\n", dir->name, "permission denied");
 		return ;
+	}
 	while ((file = readdir(directory)) > 0)
 	{
 		if (file->d_type == DT_DIR && !IS(file->d_name, ".") && !IS(file->d_name, "..") && RR_ON)
