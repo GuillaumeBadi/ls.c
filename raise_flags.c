@@ -1,4 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raise_flags.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gbadi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/12/07 14:13:55 by gbadi             #+#    #+#             */
+/*   Updated: 2014/12/07 14:34:18 by gbadi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
+
+static void				fuck_la_norme(void)
+{
+	ft_putstr("ls: illegal option -- y\nusage: ls");
+	ft_putstr("[-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]");
+	exit(1);
+}
 
 void					raise_flags(int ac, char **av, int *flags)
 {
@@ -21,12 +40,9 @@ void					raise_flags(int ac, char **av, int *flags)
 			else if (opt[i] == 't')
 				*flags |= T_FLAG;
 			else
-				// Norme interruption
-				printf("%s:%s\n", "NOT AN OPTION", opt);
+				fuck_la_norme();
 			i++;
 		}
 		i = 1;
 	}
 }
-
-

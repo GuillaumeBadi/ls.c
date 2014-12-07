@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls_relaunch.c                                   :+:      :+:    :+:   */
+/*   format_int_colum.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbadi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/07 12:31:17 by gbadi             #+#    #+#             */
-/*   Updated: 2014/12/07 14:22:14 by gbadi            ###   ########.fr       */
+/*   Created: 2014/12/07 12:29:53 by gbadi             #+#    #+#             */
+/*   Updated: 2014/12/07 12:30:27 by gbadi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void					ft_ls_relaunch(t_node *dirs, int flags)
+char				*format_int_column(int number, int orientation, int len)
 {
-	t_node				*current;
+	char			*str;
 
-	current = dirs;
-	if (current == NULL)
-		return ;
-	while (current != NULL)
+	str = ft_itoa(number);
+	if (len)
 	{
-		if ((A_ON && ISHIDDEN(current)) || !ISHIDDEN(current))
+		while (ft_strlen(str) < len)
 		{
-			ft_putchar('\n');
-			ft_putstr(current->path);
-			ft_putstr(":\n");
+			if (orientation == LEFT)
+				str = ft_strjoin(str, " ");
+			else
+				str = ft_strjoin(" ", str);
 		}
-		ft_ls(current, flags);
-		current = current->next;
 	}
+	return (str);
 }

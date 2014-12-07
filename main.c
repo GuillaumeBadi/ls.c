@@ -1,19 +1,34 @@
 #include "ft_ls.h"
 
+int					unknown(char *path)
+{
+	struct stat		st;
+
+	return (lstat(path, &st) != 0);
+}
+
 t_node				*get_args(int ac, char **av, int flags)
 {
 	t_node			*list;
+	t_node			*files;
+	t_node			*current;
 	int				dir;
+	int				ret;
 
 	dir = 0;
+	ret = 0;
 	// Norme interruption
 	list = new_elem(".", ".", 0);
+	files = new_elem(".",".", 0);
 	while (--ac)
 	{
 		if (!ISOPT(av[ac]))
 		{
 			// Norme interruption
-			list = sort_insert(list, new_elem(av[ac], av[ac], 0), flags);
+			if (is_dir(av[ac], flags))
+				list = sort_insert(list, new_elem(av[ac], av[ac], 0), flags);
+			else
+				files = sort_insert(files, new_elem(av[ac], av[ac], 0), flags);
 			dir = 1;
 		}
 	}
@@ -21,6 +36,27 @@ t_node				*get_args(int ac, char **av, int flags)
 	{
 		// Norme interruption
 		list = list->next;
+	}
+	files = files->next;
+	current = files;
+	if (files)
+	{
+		while (current != NULL)
+		{
+			if (!unknown(current->path))
+				ft_ls(current, flags);
+			else
+				perror(ft_strjoin("ls: ", current->name));
+			current = current->next;
+		}
+		if (!list)
+			exit(1);
+		if (!list->next)
+		{
+			printf("\n%s:\n", list->name);
+		}
+		else if (list)
+			printf("\n");
 	}
 	return (list);
 }

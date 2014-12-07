@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gbadi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/12/07 14:09:08 by gbadi             #+#    #+#             */
+/*   Updated: 2014/12/07 14:10:59 by gbadi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int					greater(char *i, char *j)
+int							greater(char *i, char *j)
 {
 	return (ft_strcmp(i, j) > 0);
 }
@@ -32,19 +43,22 @@ static t_node				*insert_before(t_node *list, t_node *node)
 	return (node);
 }
 
-t_node				*sort_insert(t_node *list, t_node *node, int flags)
+t_node						*sort_insert(t_node *list, t_node *node, int flags)
 {
 	t_node			*current;
 
 	current = list;
-	if ( (T_ON) ? time_compare(current, node) : greater(current->name, node->name) )
+	if ((T_ON) ? time_compare(current, node)
+			: greater(current->name, node->name))
 	{
 		insert_before(list, node);
 		return (node);
 	}
 	else
 	{
-		while (current->next != NULL && ( (T_ON) ? time_compare(node, current->next) : greater(node->name, current->next->name) ) )
+		while (current->next != NULL && ((T_ON) ?
+					time_compare(node, current->next)
+					: greater(node->name, current->next->name)))
 			current = current->next;
 		insert_after(current, node);
 	}
