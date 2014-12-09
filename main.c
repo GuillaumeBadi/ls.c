@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gbadi <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2014/12/09 02:35:13 by gbadi             #+#    #+#             */
+/*   Updated: 2014/12/09 02:43:24 by gbadi            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
 int					unknown(char *path)
@@ -5,6 +17,17 @@ int					unknown(char *path)
 	struct stat		st;
 
 	return (lstat(path, &st) != 0);
+}
+
+int					is_ok(char *path)
+{
+	DIR				*dir;
+
+	if ((dir = opendir(path)) == NULL)
+		return (0);
+	else
+		closedir(dir);
+	return (1);
 }
 
 t_node				*get_args(int ac, char **av, int flags)
@@ -26,7 +49,12 @@ t_node				*get_args(int ac, char **av, int flags)
 		{
 			// Norme interruption
 			if (is_dir(av[ac], flags))
-				list = sort_insert(list, new_elem(av[ac], av[ac], 0), flags);
+			{
+				if (is_ok(av[ac]))
+					list = sort_insert(list, new_elem(av[ac], av[ac], 0), flags);
+				else
+					perror(ft_strjoin("ls: ", av[ac] + 1));
+			}
 			else
 				files = sort_insert(files, new_elem(av[ac], av[ac], 0), flags);
 			dir = 1;
@@ -53,10 +81,12 @@ t_node				*get_args(int ac, char **av, int flags)
 			exit(1);
 		if (!list->next)
 		{
-			printf("\n%s:\n", list->name);
+			ft_putstr("\n");
+			ft_putstr(list->name);
+			ft_putstr(":\n");
 		}
-		else if (list)
-			printf("\n");
+		else
+			ft_putstr("\n");
 	}
 	return (list);
 }
@@ -102,11 +132,16 @@ int					main(int ac, char **av)
 			// norme interupt
 			if (first)
 			{
-				dprintf(1, "%s:\n", current->path);
+				ft_putstr(current->path);
+				ft_putstr(":\n");
 				first = !first;
 			}
 			else
-				dprintf(1, "\n%s:\n", current->path);
+			{
+				ft_putstr("\n");
+				ft_putstr(current->path);
+				ft_putstr(":\n");
+			}
 			ft_ls(current, flags);
 			current = current->next;
 		}

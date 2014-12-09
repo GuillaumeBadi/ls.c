@@ -1,49 +1,23 @@
-.:
-outtest
-a.out
-render_files.c
-ft_ls.h
-ft_ls.c
-sort.c
-main.c
-new_elem.c
-dir1
-push_elem.c
-real
-libft
-dir2
-ft_filepermission.c
-ft_ls.pdf
-ft_ls_relaunch.c
-get_next_opt.c
-libft.h
-list.h
-ls.h
-path_join.c
-raise_flags.c
-render_details.c
-render_list.c
-render_list_r.c
-resources_ft_ls.pdf
-test
-
-..:
-fls_finale
-42
-Library
-Desktop
-Documents
-Downloads
-neural.js
-test.rb
-test.js
-ft_ls
-batard.sh
-Corrections
-corret
-a.out
-Music
-game
-pong
-javascript
-Applications
+total 16445
+drwxrwxr-x+ 83 root  admin            2822 Dec  6 18:58 Applications
+drwxr-xr-x   3 root  wheel             102 Sep 21 00:59 Developer
+drwxr-xr-x+ 68 root  wheel            2312 Nov  6 14:28 Library
+drwxr-xr-x@  2 root  wheel              68 Aug 25  2013 Network
+drwxr-xr-x+  4 root  wheel             136 Feb  5  2014 System
+drwxr-xr-x   5 root  admin             170 Feb  5  2014 Users
+drwxrwxrwt@  4 root  admin             136 Dec  7 18:35 Volumes
+drwxr-xr-x@ 39 root  wheel            1326 Oct  6 14:06 bin
+drwxrwxr-t@  2 root  admin              68 Aug 25  2013 cores
+dr-xr-xr-x   3 root  wheel            4264 Dec  4 09:07 dev
+lrwxr-xr-x@  1 root  wheel              11 Feb  5  2014 etc -> private/etc
+drwx------+ 13 exam  applications      442 Dec  4 13:00 exam
+dr-xr-xr-x   2 root  wheel               1 Dec  8 10:29 home
+-rwxr-x--x   1 root  wheel         8393256 Sep 20  2013 mach_kernel
+dr-xr-xr-x   2 root  wheel               1 Dec  8 10:29 net
+lrwxr-xr-x   1 root  wheel              17 Sep 21 00:12 nfs -> /Volumes/Data/nfs
+drwxr-xr-x   3 root  wheel             102 Nov  3  2013 opt
+drwxr-xr-x@  6 root  wheel             204 Feb  5  2014 private
+drwxr-xr-x@ 63 root  wheel            2142 Oct  6 14:06 sbin
+lrwxr-xr-x@  1 root  wheel              11 Feb  5  2014 tmp -> private/tmp
+drwxr-xr-x@ 12 root  wheel             408 Oct  6 17:27 usr
+lrwxr-xr-x@  1 root  wheel              11 Feb  5  2014 var -> private/var

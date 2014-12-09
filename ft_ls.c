@@ -6,7 +6,7 @@
 /*   By: gbadi <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/07 12:30:50 by gbadi             #+#    #+#             */
-/*   Updated: 2014/12/07 15:09:02 by gbadi            ###   ########.fr       */
+/*   Updated: 2014/12/09 02:40:07 by gbadi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,19 @@ size_t					get_time(char *path)
 
 int						is_dir(char *path, int flags)
 {
-	printf("for %s\n", path);
 	struct stat			st;
 	int					ret;
 	int					i;
 
 	ret = lstat(path, &st);
-	i = ((st.st_mode & S_IFDIR) != 0 && ret == 0);
-	printf("%d\n", i);
-	return (i || !(L_ON && (S_ISLNK(st.st_mode))));
+	i = (((st.st_mode & S_IFDIR) != 0 || (S_ISLNK(st.st_mode))) && ret == 0);
+	if (L_ON && S_ISLNK(st.st_mode))
+		i = 0;
+	return (i);
 }
 
 void					ft_ls(t_node *dir, int flags)
 {
-	printf("here = %s\n", dir->path);
 	DIR					*directory;
 	struct dirent		*file;
 	t_node				*dirs;
@@ -56,7 +55,11 @@ void					ft_ls(t_node *dir, int flags)
 		render_file(dir, flags, NULL);
 		return ;
 	}
-	directory = opendir(dir->path);
+	if ((directory = opendir(dir->path)) == NULL)
+	{
+		perror("Error");
+		return ;
+	}
 	while ((file = readdir(directory)) > 0 && (PUSH(files, file)) != NULL)
 		if (ISADIR(file) && !IS(file->d_name, ".") &&
 				!IS(file->d_name, "..") && RR_ON)
